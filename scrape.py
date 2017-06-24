@@ -9,7 +9,7 @@ def main():
         content = res.content
         soup = bs(content, 'html.parser')
         shops = soup.select('div#main-contents > ul > li > div > h3 > strong > a')
-        [print('|' + shop.text + '| | | | | | | | | | [リンク](' + shop['href'] + ')|') for shop in shops]
+        [print('| [' + shop.text + '](' + shop['href'] + ') | | | | | | | | |') for shop in shops]
 
 if __name__ == '__main__':
     main()
