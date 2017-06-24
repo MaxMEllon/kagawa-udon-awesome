@@ -10,12 +10,9 @@ def main():
         content = res.content
         soup = bs(content, 'html.parser')
         shops = soup.select('div#main-contents > ul > li > div > h3 > strong > a')
-        links = map(lambda s: { 'link': s['href'] }, shops)
+        links = list(map(lambda s: { 'link': s['href'] }, shops))
         with open('list.json', 'w', encoding='utf-8') as fp:
-            fp.write('[')
-            for l in links:
-                fp.write(json.dumps(l))
-            fp.write(']')
+            json.dump({ 'all': links  }, fp)
         [print('| [' + shop.text + '](' + shop['href'] + ') | | | | | | | | |') for shop in shops]
 
 if __name__ == '__main__':
